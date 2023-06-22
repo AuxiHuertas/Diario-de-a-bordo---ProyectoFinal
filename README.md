@@ -21,6 +21,6 @@
   ##### Poder volver a visitar todas las carpetas una vez finalizado el viaje, editar o eliminar
   ##### Una vez finalizado el viaje, ver la chincheta de cada país en Verde, y al poner el pulsor por encima, ver un carrusel de todas las fotos adjuntas a esa carpeta.
   ##### Recibir un email automatico cada día con la programación.
-      
+   https://pixabay.com/es/photos/monta%C3%B1as-caminata-rocas-appenzell-7976041/
 
       
