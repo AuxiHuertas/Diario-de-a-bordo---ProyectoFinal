@@ -34,8 +34,8 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
 
 
 **Extra:
- La aplicación enviará recordatorios automáticos para cada actividad.
- Estas fotos se organizan por día y al finalizar el viaje se genera un carrusel de fotos que muestra todas las imágenes capturadas.
+- La aplicación enviará recordatorios automáticos para cada actividad.
+- Las fotos se organizan por día y al finalizar el viaje se genera un carrusel de fotos que muestra todas las imágenes capturadas.
 
 
 
