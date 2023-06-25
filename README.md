@@ -19,7 +19,8 @@ Los usuarios pueden programar actividades diarias durante su viaje marcando la f
 Para lo anterior, cuando el usuario eliga un lugar en el mapa, se debe abrir una carpeta a la izquierda con un calendario para marcar la fecha del viaje. 
 
 Dentro de esta el usuario puede crear carpetas por dia de viaje, en la que puede adjuntar toda la documentacion necesaria y las fotos del día. 
-Ejemplo : 
+{
+  Ejemplo : 
   Londres - 15/09/2023 - 22/09/2023
     Día 1
       Vuelo ida
@@ -42,4 +43,20 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
    ![image](./imagenes/Registro.jpeg)
    ![image](./imagenes/Panel.jpeg)
 
-      
+## Definición Técnica
+
+#### Alta de usuarios:
+
+- Necesitamos una tabla de "users" en la que se vayan cargando los datos de los usuarios.
+  {
+    id, (uuid v4, PRIMARYKEY),
+    Email, (TEXT NOT NULL Y UNIQUE),
+    Username, (TEXT NOT NULL Y UNIQUE),
+    Password , (TEXT NOT NULL Y UNIQUE)
+  }
+
+- Rutas para el registro, login y consulta de usuarios --> /auth
+  - POST : /signup -> Aquí debe encriptarse la contraseña utilizando la libreria "simple-stateless-auth-library"
+  - POST : /signin
+  - POST : /signout 
+
