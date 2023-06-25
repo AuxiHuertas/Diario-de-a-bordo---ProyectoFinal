@@ -136,7 +136,6 @@ img : (URL Cloudinary)
 - Utilizar Cloudinary para almacenar las imágenes,
 - Relacionar las imagenes con el id del usuario y del país visitado,
 - Estas fotos se verán almacenadas en una carpeta de cada país. 
-
 - Rutas para consultas POST y GET a base de datos:
 
 POST/country/img :
