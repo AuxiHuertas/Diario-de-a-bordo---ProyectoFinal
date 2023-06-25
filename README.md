@@ -7,7 +7,7 @@ Los usuarios pueden crear una cuenta personal utilizando una página de registro
 
 La pagina inicial será la de registro, con un botón para acceder directamente al login si el usuario ya está logado. Al igual que en la pagina de login debe haber un boton para acceder al registro. 
 
-Una vez logado, el usuario debe ser redirigido a la pagina principa, que debe contener los siguientes campos:
+Una vez logado, el usuario debe ser redirigido a la pagina principal, que debe contener los siguientes campos:
 
 #### Mapa interactivo:
 Los usuarios pueden visualizar un mapa interactivo donde podrán marcar los lugares que planean visitar durante su viaje. 
@@ -19,6 +19,7 @@ Los usuarios pueden programar actividades diarias durante su viaje marcando la f
 Para lo anterior, cuando el usuario eliga un lugar en el mapa, se debe abrir una carpeta a la izquierda con un calendario para marcar la fecha del viaje. 
 
 Dentro de esta el usuario puede crear carpetas por dia de viaje, en la que puede adjuntar toda la documentacion necesaria y las fotos del día. 
+```
 {
   Ejemplo : 
   Londres - 15/09/2023 - 22/09/2023
@@ -29,14 +30,11 @@ Dentro de esta el usuario puede crear carpetas por dia de viaje, en la que puede
     Día 2
       Entradas 
       Reserva Restaurante
+}
+```
 
 #### Gestión de fotos:
 Los usuarios pueden agregar fotos a medida que realizan actividades durante su viaje por día, que se quedarán archivadas en cada carpeta. 
-
-
-**Extra:
-- La aplicación enviará recordatorios automáticos para cada actividad.
-- Las fotos se organizan por día y al finalizar el viaje se genera un carrusel de fotos que muestra todas las imágenes capturadas.
 
 
 
@@ -76,7 +74,7 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
     id, (uuid v4, PRIMARYKEY)
     idUser, (uuid v4, REFERENCE (users))
     NameCountry, TEXT NOT NULL
-    LatLmg (NUMBER) ->(Este dato viene proporcionado por el     front con el evento click y con el plugin de marcador de la misma libreria)
+    LatLmg (TEXT NOT NULL) ->(Este dato viene proporcionado por el     front con el evento click y con el plugin de marcador de la misma libreria)
   }
   ```
   
@@ -86,13 +84,15 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
   - Para recoger los datos que proporcionan tanto el plugin de click o el de marcador de la libreria,
     const latlng : "datos recogidos del front"
 
-    POST : /country
+    POST : /country 
+    ```
       Body 
       {
+        "id_username"
         "NameCountry"
         "latlng"
       }
-
+    ```
 #### Gestion de itinerarios y actividades
 
 - Tabla activities:
@@ -115,17 +115,22 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
   Esto pasará a la tabla Activities con una consulta POST
 
 POST : /Country/activities 
+```
+body
+```
   {
+    "id_country" 
     "description" : 
     "date":
   }
+  ```
 
 #### Gestion de fotos
 - Tabla Imgs :
 ```
 {
-id_username :(uuid v4 , REFERENCE (country)),
-id_country :( uuid v4 , REFERENCE (users)),
+id_username :(uuid v4 , REFERENCE (users)),
+id_country :( uuid v4 , REFERENCE (country)),
 img : (URL Cloudinary)
 }
 ``` 
@@ -136,9 +141,13 @@ img : (URL Cloudinary)
 - Rutas para consultas POST y GET a base de datos:
 
 POST/country/img :
+```
  {
+  id_username 
+  id_country
   url: "url cloudinary"
  }
+ ```
 
 GET/country/img : Visualizacion de todas las fotos del usuario en el front. 
 
