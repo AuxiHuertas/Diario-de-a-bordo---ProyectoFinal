@@ -48,15 +48,43 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
 #### Alta de usuarios:
 
 - Necesitamos una tabla de "users" en la que se vayan cargando los datos de los usuarios.
-  {
+  ```
+   {
     id, (uuid v4, PRIMARYKEY),
     Email, (TEXT NOT NULL Y UNIQUE),
     Username, (TEXT NOT NULL Y UNIQUE),
     Password , (TEXT NOT NULL Y UNIQUE)
   }
+ 
 
 - Rutas para el registro, login y consulta de usuarios --> /auth
   - POST : /signup -> Aquí debe encriptarse la contraseña utilizando la libreria "simple-stateless-auth-library"
   - POST : /signin
   - POST : /signout 
+
+#### Mapa interactivo
+ - Integrar libreria leaflet
+ - Utilizar plugin de control de busqueda de la propia libreria
+ - Utilizar plugin de marcadores de la propia libreria
+ - Ajustar zoom para que visualizar el mapamundi completo por paises
+   - Tabla para  volcar los datos del país marcado por el usuario :
+  ```{
+    id, (uuid v4, PRIMARYKEY)
+    idUser, (uuid v4, REFERENCE (users))
+    NameCountry, TEXT NOT NULL
+    LatLmg (NUMBER) ->(Este dato viene proporcionado por el     front con el evento click y con el plugin de marcador de la misma libreria)
+  }
+
+  Rutas para introducir los datos en la tabla posterior:
+  - Para recoger los datos que proporciona el plugin de Clic o marcador de la libreria,
+    const latlng : "datos recogidos del front"
+
+    POST : /country
+      Body 
+      {
+        "NameCountry"
+        "latlng"
+      }
+
+#### 
 
