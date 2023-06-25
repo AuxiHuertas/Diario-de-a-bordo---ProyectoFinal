@@ -45,6 +45,8 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
 
 
 ## Definición Técnica
+### BACKEND
+
 
 #### Alta de usuarios:
 
@@ -91,7 +93,7 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
         "latlng"
       }
 
-#### Gestion de itinerarios
+#### Gestion de itinerarios y actividades
 
 - Tabla activities:
 
@@ -138,4 +140,40 @@ POST/country/img :
   url: "url cloudinary"
  }
 
-GET/Contry/img : Visualizacion de todas las fotos del usuario en el front. 
+GET/country/img : Visualizacion de todas las fotos del usuario en el front. 
+
+### FRONTEND
+
+#### Usuarios
+- Register (Sin proteger, pero si estamos logados, nos redirigirá al Panel), contendrá :
+  - Campo email (requerido)
+  - Campo username (requerido)
+  - Campo password (requerido, longitud mínima de 4 caracteres)
+  - Campo submit (si todo va bien, redirigir a Login)
+
+- Login (Sin proteger, pero si estamos logados, nos redirigirá al Panel)
+  - Título h1 "Login"
+  - Campo email (requerido)
+  - Campo password (requerido, longitud mínima de 4 caracteres)
+  - Campo submit (si todo va bien, redirigir a Panel)
+
+- Panel (Protegida, si no estamos logados, nos redirigirá al Login), contendrá:
+
+  - Mapa interactivo, con barra buscadore y botón para crear marcadores
+
+  - Sidebar en el que se encontrará los datos del usuario 
+    - Nombre en negrita
+    - Botón para salir de la app
+
+    - Países marcados por el usuario,
+     - Calendario para marcar la fecha del viaje dentro de un input
+     - Input para adjuntar fotos.
+
+Y dentro de la carpeta del país podrá crear el usuario datos de las actividades con los siguientes campos :
+
+       - Input para nombrar la actividad
+       - Calendario para marcar la fecha de la actividad
+       - Campo para guardar la documentacion de la actividad.
+       
+** Extra : Añadir avisos por email de cada actividad
+** Carrusel de imagenes en los marcadores. 
