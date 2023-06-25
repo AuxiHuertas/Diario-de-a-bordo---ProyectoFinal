@@ -41,7 +41,7 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
 
 
    ![image](./imagenes/Registro.jpeg)
-   ![image](./imagenes/Panel.jpeg)
+   ![image](./imagenes/Panel2.jpeg)
 
 
 ## Definición Técnica
@@ -70,8 +70,8 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
  - Integrar libreria leaflet
  - Utilizar plugin de control de busqueda de la propia libreria
  - Utilizar plugin de marcadores de la propia libreria
- - Ajustar zoom para que visualizar el mapamundi completo por paises
-- Tabla Country para  volcar los datos del país marcado por el usuario :
+ - Ajustar zoom para visualizar el mapamundi completo por paises
+ - Tabla Country para  volcar los datos del país marcado por el usuario :
   ```{
     id, (uuid v4, PRIMARYKEY)
     idUser, (uuid v4, REFERENCE (users))
@@ -83,7 +83,7 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
 
 - Rutas para introducir los datos en la tabla anterior:
 
-  - Para recoger los datos que proporciona el plugin de Clic o marcador de la libreria,
+  - Para recoger los datos que proporcionan tanto el plugin de click o el de marcador de la libreria,
     const latlng : "datos recogidos del front"
 
     POST : /country
@@ -108,8 +108,8 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
 
 - Ruta para añadir las actividades a la tabla anterior, 
 
-  - El usuario añadirá manualmente las actividades que realizará y su fecha, para eso tendra 2 campos a cumplimentar en el front:
-    - Descripcion
+  - El usuario añadirá manualmente las actividades que realizará y su fecha, para eso tendrá 2 campos a cumplimentar en el front:
+    - Descripción
     - Fecha (Calendario)
 
   Esto pasará a la tabla Activities con una consulta POST
@@ -159,21 +159,21 @@ GET/country/img : Visualizacion de todas las fotos del usuario en el front.
 
 - Panel (Protegida, si no estamos logados, nos redirigirá al Login), contendrá:
 
-  - Mapa interactivo, con barra buscadore y botón para crear marcadores
+  - Mapa interactivo, con barra buscadora y botón para crear marcadores
 
   - Sidebar en el que se encontrará los datos del usuario 
     - Nombre en negrita
     - Botón para salir de la app
 
     - Países marcados por el usuario,
-     - Calendario para marcar la fecha del viaje dentro de un input
+     - Calendario para marcar la fecha del viaje dentro de un input justo al lado del nombre del país visitado. 
      - Input para adjuntar fotos.
 
-Y dentro de la carpeta del país podrá crear el usuario datos de las actividades con los siguientes campos :
+Y dentro de la carpeta del país podrá crear el propio usuario datos de las actividades con los siguientes campos :
 
        - Input para nombrar la actividad
        - Calendario para marcar la fecha de la actividad
        - Campo para guardar la documentacion de la actividad.
-       
+
 ** Extra : Añadir avisos por email de cada actividad
 ** Carrusel de imagenes en los marcadores. 
