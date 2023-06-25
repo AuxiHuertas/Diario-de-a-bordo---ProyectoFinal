@@ -96,7 +96,7 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
 #### Gestion de itinerarios y actividades
 
 - Tabla activities:
-
+f
 ```
 {
   "id": (uuid v4, PRIMARY KEY),
@@ -117,7 +117,6 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
 POST : /Country/activities 
 ```
 body
-```
   {
     "id_country" 
     "description" : 
@@ -142,6 +141,7 @@ img : (URL Cloudinary)
 
 POST/country/img :
 ```
+Body
  {
   id_username 
   id_country
