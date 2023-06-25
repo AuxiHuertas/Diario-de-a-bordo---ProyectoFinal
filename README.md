@@ -55,6 +55,7 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
     Username, (TEXT NOT NULL Y UNIQUE),
     Password , (TEXT NOT NULL Y UNIQUE)
   }
+  ```
  
 
 - Rutas para el registro, login y consulta de usuarios --> /auth
@@ -67,15 +68,18 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
  - Utilizar plugin de control de busqueda de la propia libreria
  - Utilizar plugin de marcadores de la propia libreria
  - Ajustar zoom para que visualizar el mapamundi completo por paises
-   - Tabla Country para  volcar los datos del país marcado por el usuario :
+- Tabla Country para  volcar los datos del país marcado por el usuario :
   ```{
     id, (uuid v4, PRIMARYKEY)
     idUser, (uuid v4, REFERENCE (users))
     NameCountry, TEXT NOT NULL
     LatLmg (NUMBER) ->(Este dato viene proporcionado por el     front con el evento click y con el plugin de marcador de la misma libreria)
   }
+  ```
+  
 
-  Rutas para introducir los datos en la tabla posterior:
+- Rutas para introducir los datos en la tabla anterior:
+
   - Para recoger los datos que proporciona el plugin de Clic o marcador de la libreria,
     const latlng : "datos recogidos del front"
 
@@ -89,6 +93,7 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
 #### Gestion de itinerarios
 
 - Tabla activities:
+
 ```
 {
   "id": (uuid v4, PRIMARY KEY),
@@ -96,16 +101,34 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
   "NameActivity": TEXT NOT NULL,
   "dateActivity":TEXT NOT NULL,
 }
+```
 
-Rutas :
-El usuario añadirá manualmente las actividades que realizará y su fecha, para eso tendra 2 campos a cumplimentar en el front:
-  Descripcion
-  Fecha (Calendario)
+- Ruta para añadir las actividades a la tabla anterior, 
 
-Esto pasará a la tabla Activities con una consulta POST
+  - El usuario añadirá manualmente las actividades que realizará y su fecha, para eso tendra 2 campos a cumplimentar en el front:
+    - Descripcion
+    - Fecha (Calendario)
+
+  Esto pasará a la tabla Activities con una consulta POST
 
 POST : /Country/activities 
   {
     "description" : 
     "date":
   }
+
+#### Gestion de fotos
+- Tabla Imgs :
+```
+{
+id_username :(uuid v4 , REFERENCE (country)),
+id_country :( uuid v4 , REFERENCE (users)),
+img : (URL Cloudinary)
+}
+``` 
+- Utilizar Cloudinary para almacenar las imágenes,
+- Relacionar las imagenes con el id del usuario y del país visitado,
+- Estas fotos se verán almacenadas en una carpeta de cada país. 
+
+
+
