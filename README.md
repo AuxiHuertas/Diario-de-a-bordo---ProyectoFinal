@@ -67,7 +67,7 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
  - Utilizar plugin de control de busqueda de la propia libreria
  - Utilizar plugin de marcadores de la propia libreria
  - Ajustar zoom para que visualizar el mapamundi completo por paises
-   - Tabla para  volcar los datos del país marcado por el usuario :
+   - Tabla Country para  volcar los datos del país marcado por el usuario :
   ```{
     id, (uuid v4, PRIMARYKEY)
     idUser, (uuid v4, REFERENCE (users))
@@ -86,5 +86,26 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
         "latlng"
       }
 
-#### 
+#### Gestion de itinerarios
 
+- Tabla activities:
+```
+{
+  "id": (uuid v4, PRIMARY KEY),
+  "id_country ": (uuid v4, REFERENCE (country))
+  "NameActivity": TEXT NOT NULL,
+  "dateActivity":TEXT NOT NULL,
+}
+
+Rutas :
+El usuario añadirá manualmente las actividades que realizará y su fecha, para eso tendra 2 campos a cumplimentar en el front:
+  Descripcion
+  Fecha (Calendario)
+
+Esto pasará a la tabla Activities con una consulta POST
+
+POST : /Country/activities 
+  {
+    "description" : 
+    "date":
+  }
