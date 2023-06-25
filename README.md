@@ -43,6 +43,7 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
    ![image](./imagenes/Registro.jpeg)
    ![image](./imagenes/Panel.jpeg)
 
+
 ## Definición Técnica
 
 #### Alta de usuarios:
@@ -130,5 +131,11 @@ img : (URL Cloudinary)
 - Relacionar las imagenes con el id del usuario y del país visitado,
 - Estas fotos se verán almacenadas en una carpeta de cada país. 
 
+- Rutas para consultas POST y GET a base de datos:
 
+POST/country/img :
+ {
+  url: "url cloudinary"
+ }
 
+GET/Contry/img : Visualizacion de todas las fotos del usuario en el front. 
