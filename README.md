@@ -70,11 +70,12 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
  - Utilizar plugin de marcadores de la propia libreria
  - Ajustar zoom para visualizar el mapamundi completo por paises
  - Tabla Country para  volcar los datos del país marcado por el usuario :
+
   ```{
     id, (uuid v4, PRIMARYKEY)
-    idUser, (uuid v4, REFERENCE (users))
-    NameCountry, TEXT NOT NULL
-    LatLmg (TEXT NOT NULL) ->(Este dato viene proporcionado por el     front con el evento click y con el plugin de marcador de la misma libreria)
+    name_country, TEXT NOT NULL
+    lat_lmg (TEXT NOT NULL) ->(Este dato viene proporcionado por el     front con el evento click y con el plugin de marcador de la misma libreria)
+    id_user, (uuid v4, REFERENCE (users))
   }
   ```
   
@@ -88,21 +89,21 @@ Los usuarios pueden agregar fotos a medida que realizan actividades durante su v
     ```
       Body 
       {
-        "id_username"
-        "NameCountry"
-        "latlng"
+        "id_user"
+        "name_country"
+        "lat_lng"
       }
     ```
 #### Gestion de itinerarios y actividades
 
 - Tabla activities:
-f
+
 ```
 {
   "id": (uuid v4, PRIMARY KEY),
-  "id_country ": (uuid v4, REFERENCE (country))
-  "NameActivity": TEXT NOT NULL,
-  "dateActivity":TEXT NOT NULL,
+  "name_activity": TEXT NOT NULL,
+  "date_activity":TEXT NOT NULL,
+  "id_country": (uuid v4, REFERENCE (country))
 }
 ```
 
@@ -125,9 +126,10 @@ body
   ```
 
 #### Gestion de fotos
-- Tabla Imgs :
+- Tabla imgs :
 ```
 {
+id: (uuid v4, PRIMARY KEY)
 id_username :(uuid v4 , REFERENCE (users)),
 id_country :( uuid v4 , REFERENCE (country)),
 img : (URL Cloudinary)
