@@ -1,5 +1,9 @@
+const e = require("express")
+const { insertUser } = require("./queries")
+
 const createNewUser = (db) => async (username,password,email) => {
     try{
+        await db.query(insertUser(username,password,email))
         return {
             ok :true
         }
@@ -12,4 +16,8 @@ const createNewUser = (db) => async (username,password,email) => {
             message: error.message,
         }
     }
+}
+
+module.export = {
+    createNewUser,
 }

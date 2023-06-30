@@ -7,3 +7,6 @@ INSERT INTO users (
     ${username},${password},${email}
 )
 `
+module.exports = {
+    insertUser,
+}
