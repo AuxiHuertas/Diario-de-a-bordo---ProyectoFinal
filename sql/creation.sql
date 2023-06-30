@@ -6,13 +6,14 @@ CREATE TABLE IF NOT EXISTS users (
     username TEXT NOT NULL,
     password TEXT NOT NULL,
     email TEXT NOT NULL ,
-)
+);
+
 CREATE TABLE IF NOT EXISTS country (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     id_user uuide REFERENCES user NOT NULL,
     name_country TEXT NOT NULL, /* Para que esto aparezca, debes de volcar el campo latlng en geonames.org y traer el nombre de aquí*/
     latlng_country TEX NOT NULL, /*Este campo vendrá volcado del mapa interactivo de leaflet*/
-)
+);
 
 CREATE TABLE IF NOT EXISTS activities (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -20,10 +21,10 @@ CREATE TABLE IF NOT EXISTS activities (
     name_activity TEXT NOT NULL,
     date_activity DATE, /*este campo debe ser un calendario*/
     hour_activity TIME, /*este campo debe ser un reloj */
-)
+);
 
 CREATE TABLE IF NOT EXISTS img (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     id_country uuid REFERENCES country NOT NULL,
-    img VARCHAR(200) /*Aquí debe llegar mediante llamada POST la URL de la imagen a través de Cloudinary */
-)
+    img VARCHAR(200), /*Aquí debe llegar mediante llamada POST la URL de la imagen a través de Cloudinary */
+);
