@@ -1,6 +1,6 @@
 
 const errors = require('../../misc/errors')
-const { hash } = require ('../../node_modules/simple-stateless-auth-library')
+const { hash } = require ('simple-stateless-auth-library')
 const { createNewUser } = require('../../models/auth')
 
 module.exports = (db) => async (req,res,next) =>  {
