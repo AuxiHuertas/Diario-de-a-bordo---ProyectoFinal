@@ -1,5 +1,7 @@
+
 const errors = require('../../misc/errors')
-const { createNewUser }= require('../../models/auth')
+const { hash } = require ('../../node_modules/simple-stateless-auth-library')
+const { createNewUser } = require('../../models/auth')
 
 module.exports = (db) => async (req,res,next) =>  {
 
@@ -9,7 +11,9 @@ module.exports = (db) => async (req,res,next) =>  {
 
     if(!username || !password) return next (errors[400])
 
-    const response = await createNewUser(await db)(username,password,email)
+    const encrypted = await hash.encrypt(password)
+
+    const response = await createNewUser (await db)(username,encrypted,email)
 
     if(!response.ok) return next (errors[500])
 
