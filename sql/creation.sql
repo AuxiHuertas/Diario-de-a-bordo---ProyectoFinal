@@ -6,7 +6,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS users (
     id uuid PRIMARY KEY DEFAULT  uuid_generate_v4(),
-    username TEXT NOT NULL UNIQUE,-- Está creando valores duplicados a pesar de ser UNIQUE , 
+    username TEXT NOT NULL UNIQUE,-- Está creando valores duplicados a pesar de ser UNIQUE -> No has creado de nuevo la tabla despues de añadir UNIQUE, 
     password TEXT NOT NULL,
     email TEXT NOT NULL 
 );
