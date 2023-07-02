@@ -29,9 +29,14 @@ const selectByUsername = (db) => async (username,compareFn) => {
             error_code : 'wrong_data'
         }
 
+        
         const areEqual = await compareFn(user.password) //El password encriptado lo está tomando de la query, por ello utiliza user. 
-
-        console.log("Son iguales?", areEqual)
+        console.log(">son iguales? ", areEqual)
+        
+        if(!areEqual) return {
+            ok: false,
+            error_code : 'wrong_data'
+        }
 
         return {
             ok :true
