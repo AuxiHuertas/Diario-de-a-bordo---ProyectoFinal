@@ -2,16 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Login from './pages/login';
 import Panel from './pages/panel';
-import {Swicht, Route, Redirect} from 'wouter'
+import {Switch, Route, Redirect} from 'wouter'
 
 
 const Main = () => {
   return (
-    <Swicht>
+    <Switch>
       <Route path="/login" component={Login}/>
       <Route path="/" component={Panel} />
       <Redirect to = "/login" />
-    </Swicht>
+    </Switch>
   );
 };
 
