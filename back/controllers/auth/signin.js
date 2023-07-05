@@ -16,7 +16,7 @@ module.exports = (db) => async (req, res, next) => {
 
   if (!response.ok) return next(errors[response.error_code || 500]); // Aquí estamos controlando que el username sea igual que en db, es decir, que exista en base de datos y no sera erroneo.
 
-  serialize(res, response.content);
+  serialize(res, response.content, {value: 30, type: 'm'});
 
   res.status(200).json({
     success: true,
