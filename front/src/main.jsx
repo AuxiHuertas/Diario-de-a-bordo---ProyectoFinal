@@ -10,7 +10,7 @@ const Main = () => {
     <Switch>
       <Route path="/login" component={Login}/>
       <Route path="/" component={Panel} />
-      <Redirect to = "/login" />
+      <Redirect to="/login" />
     </Switch>
   );
 };
