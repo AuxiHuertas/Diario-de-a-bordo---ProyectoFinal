@@ -1,4 +1,4 @@
-import provider from './context/provider';
+import Provider from './context/provider';
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Login from './pages/login';
@@ -8,13 +8,13 @@ import {Switch, Route, Redirect} from 'wouter'
 
 const Main = () => {
   return (
-    <provider>
+    <Provider>
     <Switch>
       <Route path="/login" component={Login}/>
       <Route path="/" component={Panel} />
       <Redirect to="/login" />
     </Switch>
-    </provider>
+    </Provider>
   );
 };
 
