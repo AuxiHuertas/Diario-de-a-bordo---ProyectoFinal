@@ -1,11 +1,11 @@
 import { QueryClientProvider, QueryClient } from "react-query" ;
 const queryClient = new QueryClient ();
 
-const provider = ({children}) => {
+const Provider = ({children}) => {
     return (
         <QueryClientProvider client={queryClient}> {children} </QueryClientProvider>
     );
 };
 
-export default provider;
+export default Provider;
 
