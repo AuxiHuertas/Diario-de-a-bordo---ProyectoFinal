@@ -1,31 +1,19 @@
-import { useForm } from "react-hook-form";
-import * as templates from "../../misc/templates.js";
-import { useLogin } from "../../hooks/useLogin.js";
-import { useUser } from "../../hooks/useUser.js";
-import { useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { useForm } from "react-hook-form"
+import { login } from "../../misc/templates"
+import { useSignUp } from "../../hooks/useSignUp";
 
 
 
-const Login = () => {
-  const { register, formState, handleSubmit } = useForm();
-  const doLogin = useLogin();
-  const [,setLocation] = useLocation();
-  const { data } = useUser()
- 
+const SignUp = () => {
+    const {register, formState, handleSubmit } = useForm();
+    const doSigUp = useSignUp();
 
-
-  useEffect(() => {
-    data && setLocation('/')
-  }, [data]);
-
-  const { errors, email, username, password } = templates.login;
-
-  return (
+    const { errors, username, password, email } = login;
+ return (
     <section>
-      <h1>Login Page</h1>
-      <p>(Protected route) </p>
-      <form onSubmit={handleSubmit(doLogin)}>
+        <h1>Register</h1>
+    
+      <form onSubmit={handleSubmit(doSigUp)}>
         <label htmlFor="email">emails</label>
         <br />
         <input
@@ -55,14 +43,8 @@ const Login = () => {
 
         <input type="submit" />
       </form>
-      <button>
-        <Link href="/signup">
-          Register
-        </Link>
-      </button>
-
     </section>
-  );
+ )
 };
 
-export default Login;
+export default SignUp;
