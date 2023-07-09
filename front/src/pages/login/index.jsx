@@ -1,31 +1,22 @@
 import { useForm } from "react-hook-form";
 import * as templates from "../../misc/templates.js";
 import { useLogin } from "../../hooks/useLogin.js";
-import { useQuery } from "react-query";
-import { user } from "../../services";
+import { useUser } from "../../hooks/useUser.js";
 import { useEffect } from "react";
-
-const useUser = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["user"],
-    queryFn: user.info,
-  });
-
-  return (data, isLoading)
-
-}
+import { useLocation } from "wouter";
 
 
 
 const Login = () => {
   const { register, formState, handleSubmit } = useForm();
   const doLogin = useLogin();
-  const { data } = useUser();
-
+  const [,setLocation] = useLocation();
+  const { data } = useUser()
+ 
 
 
   useEffect(() => {
-    console.info(">user info", data);
+    data && setLocation('/')
   }, [data]);
 
   const { errors, email, username, password } = templates.login;
