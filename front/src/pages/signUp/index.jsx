@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form"
 import { login } from "../../misc/templates"
 import { useSignUp } from "../../hooks/useSignUp";
+import { Link } from "wouter";
 
 
 
@@ -42,9 +43,16 @@ const SignUp = () => {
         <p>{formState.errors && errors[formState.errors?.password?.type]}</p>
 
         <input type="submit" />
-      </form>
+      </form>  
+        <button>
+          <Link href="/login">
+            Login
+           </Link>
+      </button>
+
+
     </section>
- )
+ );
 };
 
 export default SignUp;
