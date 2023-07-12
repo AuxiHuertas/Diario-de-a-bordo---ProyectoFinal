@@ -1,10 +1,19 @@
-module.exports = () => async (req,res,next) =>  {
+const errors = require("../../misc/errors");
+const { getUserInfo } = require("../../models/auth");
 
-    const { username } = res.locals
-    res.status(200).json({
-        success: true,
-        data: {
-            username
-        },
-    })
-}
+module.exports = (db) => async (req, res, next) => {
+  const { username } = res.locals;
+
+  if (!username) return next(errors[400]);
+
+  const response = await getUserInfo(await db)(username);
+  console.log(response);
+
+  res.status(200).json({
+    success: true,
+    data: {
+      username,
+      response,
+    },
+  });
+};
