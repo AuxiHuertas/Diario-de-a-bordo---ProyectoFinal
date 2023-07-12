@@ -16,9 +16,9 @@ CREATE TABLE IF NOT EXISTS users (
  CREATE TABLE IF NOT EXISTS country (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     id_user uuid REFERENCES users NOT NULL,
-    lat_country TEXT NOT NULL, -- Para que este dato aparezca, debes de volcar el campo latlng en geonames.org y traer el nombre de aquí
+    lat_country TEXT NOT NULL,  -- Tanto este campo con el siguiente vendran del marker de leaflet, desde front
     lng_country TEXT NOT NULL,
-    name TEXT NOT NULL
+    name TEXT NOT NULL -- Este campo viene de Geonames, utilizando los dos campos anteriores. 
     
 );
 
