@@ -25,11 +25,11 @@ INSERT INTO country (
     )
 `;
 
-const activity = (id_country, name_activity, date_activity, hour_activity) => sql.unsafe `
+const activity = (id_country, name_activity, date_activity, hour_activity, files) => sql.unsafe `
 INSERT INTO activities(
-    id_country, name_activity, date_activity, hour_activity
+    id_country, name_activity, date_activity, hour_activity, files
 ) VALUES (
-    ${id_country}, ${name_activity}, ${date_activity}, ${hour_activity}
+    ${id_country}, ${name_activity}, ${date_activity}, ${hour_activity},${files}
 )
 
 `

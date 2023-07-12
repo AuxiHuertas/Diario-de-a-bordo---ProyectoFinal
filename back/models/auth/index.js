@@ -73,9 +73,9 @@ const createLocation = (db) => async (id_user, lat,long,name) => {
 }
 
 
-const createActivity = (db) => async (id_country, name_activity, date_activity, hour_activity) => {
+const createActivity = (db) => async (id_country, name_activity, date_activity, hour_activity,files) => {
     try{
-        await db.query(activity(id_country, name_activity, date_activity, hour_activity))
+        await db.query(activity(id_country, name_activity, date_activity, hour_activity, files))
         return {
             ok :true
         }

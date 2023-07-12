@@ -28,7 +28,8 @@ CREATE TABLE IF NOT EXISTS activities (
     id_country uuid REFERENCES country NOT NULL,
     name_activity TEXT NOT NULL,
     date_activity DATE, -- este campo debe ser un calendario
-    hour_activity TIME -- este campo debe ser un reloj 
+    hour_activity TIME, -- este campo debe ser un reloj 
+    files TEXT -- este campo vendrá de cloudinary como url
 
 );
 
