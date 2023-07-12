@@ -1,7 +1,8 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS country;
-DROP TABLE IF EXISTS activities;
 DROP TABLE IF EXISTS img;
+DROP TABLE IF EXISTS activities;
+DROP TABLE IF EXISTS country;
+DROP TABLE IF EXISTS users;
+
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS users (
@@ -15,8 +16,10 @@ CREATE TABLE IF NOT EXISTS users (
  CREATE TABLE IF NOT EXISTS country (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     id_user uuid REFERENCES users NOT NULL,
-    name_country TEXT NOT NULL, -- Este campo vendrá volcado del mapa interactivo de leaflet
-    latlng_country TEXT NOT NULL -- Para que este dato aparezca, debes de volcar el campo latlng en geonames.org y traer el nombre de aquí
+    lat_country TEXT NOT NULL, -- Para que este dato aparezca, debes de volcar el campo latlng en geonames.org y traer el nombre de aquí
+    lng_country TEXT NOT NULL,
+    name TEXT NOT NULL
+    
 );
 
 
