@@ -6,7 +6,8 @@ import SignUp from "./pages/signUp";
 import Panel from "./pages/panel";
 import { Switch, Route, Redirect } from "wouter";
 import Guard from "./components/Guarda";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "leaflet/dist/leaflet.css";
 const Main = () => {
   return (
     <Provider>
