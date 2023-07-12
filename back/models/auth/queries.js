@@ -25,9 +25,19 @@ INSERT INTO country (
     )
 `;
 
+const activity = (id_country, name_activity, date_activity, hour_activity) => sql.unsafe `
+INSERT INTO activities(
+    id_country, name_activity, date_activity, hour_activity
+) VALUES (
+    ${id_country}, ${name_activity}, ${date_activity}, ${hour_activity}
+)
+
+`
+
 
 module.exports = {
   insertUser,
   selectUser,
   location,
+  activity,
 };

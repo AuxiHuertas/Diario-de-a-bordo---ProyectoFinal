@@ -1,5 +1,5 @@
 
-const { insertUser, selectUser, location } = require("./queries")
+const { insertUser, selectUser, location, activity } = require("./queries")
 
 
 const createNewUser = (db) => async (username,password,email) => {
@@ -72,8 +72,27 @@ const createLocation = (db) => async (id_user, lat,long,name) => {
     }
 }
 
+
+const createActivity = (db) => async (id_country, name_activity, date_activity, hour_activity) => {
+    try{
+        await db.query(activity(id_country, name_activity, date_activity, hour_activity))
+        return {
+            ok :true
+        }
+    }
+    
+    catch (error){
+        console.info(">create new activity", error.message)
+        return {
+            ok:false,
+            message: error.message,
+        }
+    }
+}
+
 module.exports = {
     createNewUser,
     selectByUsername,
     createLocation,
+    createActivity
 }
