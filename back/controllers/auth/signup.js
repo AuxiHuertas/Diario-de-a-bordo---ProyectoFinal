@@ -9,7 +9,7 @@ module.exports = (db) => async (req,res,next) =>  {
 
     console.info(username,password, email )
 
-    if(!username || !password) return next (errors[400])
+    if(!username || !password || !email) return next (errors[400])
 
     const encrypted = await hash.encrypt(password)
 

@@ -7,7 +7,7 @@ module.exports = (db) => async (req, res, next) => {
 
   console.info(">password sin encriptar", username, password, email);
 
-  if (!username || !password || !email) return next(errors[400]); // Esto controla que uno de los campos no viene dado en el body, pero no si está erroneo.
+  if (!username || !password ) return next(errors[400]); // Esto controla que uno de los campos no viene dado en el body, pero no si está erroneo.
 
   const response = await selectByUsername(await db)(
     username,
