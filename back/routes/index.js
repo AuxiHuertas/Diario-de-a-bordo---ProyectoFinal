@@ -7,7 +7,7 @@ const imgsRoutes = require ('./imgs')
 
 module.exports = (db) => {
     router.use('/auth', authRoutes(db))
-    router.use('/users', userRoutes())
+    router.use('/users', userRoutes(db))
     router.use('/market', marketRoutes(db))
     router.use('/activities',activitiesRoutes(db) )
     router.use('/imgs', imgsRoutes (db))
