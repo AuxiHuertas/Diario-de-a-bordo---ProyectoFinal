@@ -43,11 +43,24 @@ INSERT INTO img (
 
 `
 
+const infoUsers = (username) => sql.unsafe `
+SELECT users.username, country.name, activities.name_activity, img.img
+FROM users
+INNER JOIN country
+ON users.id = country.id_user
+INNER JOIN activities
+ON country.id = activities.id_country
+INNER JOIN img
+ON img.id_country = country.id
+WHERE users.username = ${username};
+`
+
 
 module.exports = {
   insertUser,
   selectUser,
   location,
   activity,
-  pictures
+  pictures,
+  infoUsers
 };

@@ -1,5 +1,5 @@
 
-const { insertUser, selectUser, location, activity, pictures } = require("./queries")
+const { insertUser, selectUser, location, activity, pictures, infoUsers,  } = require("./queries")
 
 
 const createNewUser = (db) => async (username,password,email) => {
@@ -107,10 +107,31 @@ const newImg = (db) => async (id_country, img) => {
     }
 }
 
+const getUserInfo = (db) => async (username) => {
+    try{
+        const dbres = await db.query(infoUsers (username))
+       
+        return {
+            ok :true,
+            response: dbres.rows
+        }
+    }
+    
+    catch (error){
+        console.info("> info user", error.message)
+        return {
+            ok:false,
+            message: error.message,
+        }
+    }
+}
+
+
 module.exports = {
     createNewUser,
     selectByUsername,
     createLocation,
     createActivity,
-    newImg
+    newImg,
+    getUserInfo
 }
