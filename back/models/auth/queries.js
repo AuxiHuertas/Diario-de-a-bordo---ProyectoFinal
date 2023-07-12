@@ -34,10 +34,20 @@ INSERT INTO activities(
 
 `
 
+const pictures = (id_country, img) => sql.unsafe `
+INSERT INTO img (
+    id_country, img
+) VALUES (
+    ${id_country}, ${img}
+)
+
+`
+
 
 module.exports = {
   insertUser,
   selectUser,
   location,
   activity,
+  pictures
 };
