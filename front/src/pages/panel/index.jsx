@@ -1,30 +1,89 @@
 import { useSignOut } from "../../hooks/useSignOut";
-import { MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
-import "./style.css"
+import { useUser } from "../../hooks/useUser"
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { FeatureGroup, Circle } from 'react-leaflet';
+import { EditControl } from "react-leaflet-draw";
+import axios from "axios";
+import { userMarket } from "../../hooks/userMarket";
+
 const Panel = () => {
   const doSignOut = useSignOut();
-  const position = [51.505, -0.09]
-  return (
-    <section>
-      <h1>Home</h1>
+  const doInfoUser = useUser();
+  console.log("ESto es doInfoUSeer > ", doInfoUser)
+  const position = [51.505, -0.09];
+  const doMarketUser = userMarket();
+  const create = async (e) =>{
 
-      <MapContainer center={position} zoom={13} scrollWheelZoom={false}
-       style={{ minHeight: "100vh", minWidth: "100vw" }}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </MapContainer>
-      
-      <button type="submit" onClick={doSignOut}>
-        SignOut
-      </button>
-    </section>
+    const ub = e.layer._latlng
+    console.log(e)
+    console.log(ub)
+    const info = await axios.get(`http://api.geonames.org/countryCodeJSON?lat=${ub.lat}&lng=${ub.lng}&username=gecak`)
+    doMarketUser({
+      id_user:doInfoUser.data.id,
+      ltd:ub.lat, 
+      long:ub.lng , 
+      name:info.data.countryName
+    })
+    console.log (info)
+
+  }
+
+    return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-4">
+          <section>
+            <h1>Home</h1>
+            {doInfoUser.data.response.response.map(infoCountry => 
+                
+                <p >
+                  {infoCountry.country_name}
+              </p>
+                )}
+            <button type="submit" onClick={doSignOut}>
+              SignOut
+            </button>
+          </section>
+        </div>
+
+        <div className="col-md-8">
+          <MapContainer
+            center={position}
+            zoom={2.6}
+            scrollWheelZoom={true}
+            style={{ minHeight: "100vh", minWidth: "100vw" }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <FeatureGroup>
+              <EditControl
+                position="topleft"
+                // onEdited={this._onEditPath}
+                onCreated={create}
+                // onDeleted={this._onDeleted}
+                draw={{
+                  rectangle: false,
+                  polygon: false,
+                  circle: false
+                }}
+              />  const doMarketUser = userMarket();
+              {/* <Circle center={[51.51, -0.06]} radius={200} /> */}
+              {doInfoUser.data.response.response.map(infoCountry => 
+                
+                <Marker position={[infoCountry.lat_country,infoCountry.lng_country]}>
+                <Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+              </Marker>
+                )}
+            </FeatureGroup>
+
+          </MapContainer>
+        </div>
+      </div>
+    </div>
   );
 };
 
