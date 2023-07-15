@@ -44,15 +44,36 @@ INSERT INTO img (
 `
 
 const infoUsers = (username) => sql.unsafe `
-SELECT users.username, country.name, activities.name_activity, img.img
-FROM users
-INNER JOIN country
-ON users.id = country.id_user
-INNER JOIN activities
-ON country.id = activities.id_country
-INNER JOIN img
-ON img.id_country = country.id
-WHERE users.username = ${username};
+SELECT
+  country.id AS country_id,
+  country.lat_country,
+  country.lng_country,
+  country.name AS country_name,
+  (
+    SELECT JSON_AGG(
+      JSON_BUILD_OBJECT(
+        'name_activity', activities.name_activity,
+        'date_activity', activities.date_activity,
+        'hour_activity', activities.hour_activity,
+        'files' , activities.files
+      )
+    )
+    FROM activities
+    WHERE activities.id_country = country.id
+  ) AS activities,
+  (
+    SELECT JSON_AGG(img.img)
+    FROM img
+    WHERE img.id_country = country.id
+  ) AS images
+FROM
+  users
+INNER JOIN
+  country ON users.id = country.id_user
+WHERE
+  users.username = 'harry'
+GROUP BY
+  country.id, country.lat_country, country.lng_country, country.name;
 `
 
 
