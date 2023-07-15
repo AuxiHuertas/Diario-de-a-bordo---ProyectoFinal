@@ -12,6 +12,8 @@ const Login = () => {
   const [, setLocation] = useLocation();
   const { data } = useUser();
 
+  console.log("¿esta aqui el id_user? >", data)
+
   useEffect(() => {
     data && setLocation("/");
   }, [data]);
