@@ -10,7 +10,7 @@ INSERT INTO users (
 
 const selectUser = (username) => sql.unsafe`
 
-    SELECT username, password
+    SELECT username, password, id
     FROM users
     WHERE username LIKE ${username};
 
@@ -71,7 +71,7 @@ FROM
 INNER JOIN
   country ON users.id = country.id_user
 WHERE
-  users.username = 'harry'
+   users.username = ${username}
 GROUP BY
   country.id, country.lat_country, country.lng_country, country.name;
 `
