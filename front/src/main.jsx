@@ -8,6 +8,7 @@ import { Switch, Route, Redirect } from "wouter";
 import Guard from "./components/Guarda";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "leaflet/dist/leaflet.css";
+import "leaflet-draw/dist/leaflet.draw.css"
 const Main = () => {
   return (
     <Provider>
