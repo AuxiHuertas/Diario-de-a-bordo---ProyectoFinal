@@ -41,7 +41,9 @@ const selectByUsername = (db) => async (username,compareFn) => {
         return {
             ok :true,
             content : {
-                username: user.username
+                username: user.username,
+                id: user.id
+
             }
         }
     }
