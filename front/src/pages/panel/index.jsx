@@ -4,14 +4,15 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { FeatureGroup, Circle } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import axios from "axios";
-import { userMarket } from "../../hooks/userMarket";
+import { userMarker, userMarkerEdit } from "../../hooks/userMarker";
 
 const Panel = () => {
   const doSignOut = useSignOut();
   const doInfoUser = useUser();
   console.log("ESto es doInfoUSeer > ", doInfoUser);
   const position = [51.505, -0.09];
-  const doMarketUser = userMarket();
+  const doMarkerUser = userMarker();
+  const doEditMarkerUser = userMarkerEdit()
 
   const create = async (e) => {
     const ub = e.layer._latlng;
@@ -20,7 +21,7 @@ const Panel = () => {
     const info = await axios.get(
       `http://api.geonames.org/countryCodeJSON?lat=${ub.lat}&lng=${ub.lng}&username=gecak`
     );
-    doMarketUser({
+    doMarkerUser({
       id_user: doInfoUser.data.id,
       ltd: ub.lat,
       long: ub.lng,
@@ -32,6 +33,16 @@ const Panel = () => {
   const edited = async (e) => {
     const idCountryEdit =  e.layers.getLayers()[0].options.id
     const newUb = e.layers.getLayers()[0]._latlng;
+    const infoNewName = await axios.get(
+      `http://api.geonames.org/countryCodeJSON?lat=${newUb.lat}&lng=${newUb.lng}&username=gecak`
+    );
+    doEditMarkerUser({
+      id: idCountryEdit,
+      ltd: newUb.lat,
+      long: newUb.lng,
+      name: infoNewName.data.countryName,
+    });
+    console.log("esto es infoNewName",infoNewName)
     console.log(newUb)
     console.log("evento edited", e.layers.getLayers());
   };
@@ -75,8 +86,7 @@ const Panel = () => {
                   polyline: false,
                   circlemarker: false,
                 }}
-              />{" "}
-              const doMarketUser = userMarket();
+              />
               {/* <Circle center={[51.51, -0.06]} radius={200} /> */}
               {doInfoUser.data.response.response.map((infoCountry) => (
                 <Marker

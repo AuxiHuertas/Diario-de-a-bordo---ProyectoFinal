@@ -2,4 +2,5 @@ export { useLogin } from './useLogin';
 export { useUser } from './useUser';
 export {useSignOut} from './useSignOut';
 export { useSignUp} from './useSignUp';
-export {userMarket} from './userMarket';
+export {userMarker} from './userMarker';
+export { userMarkerEdit } from './userMarker'
