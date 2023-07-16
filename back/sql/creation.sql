@@ -29,12 +29,15 @@ CREATE TABLE IF NOT EXISTS activities (
     name_activity TEXT NOT NULL,
     date_activity DATE, -- este campo debe ser un calendario
     hour_activity TIME, -- este campo debe ser un reloj 
-    files TEXT -- este campo vendrá de cloudinary como url
+    files TEXT, -- este campo vendrá de cloudinary como url
+    FOREIGN KEY (id_country) REFERENCES country (id) ON DELETE CASCADE
 
 );
 
 CREATE TABLE IF NOT EXISTS img (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     id_country uuid REFERENCES country NOT NULL,
-    img VARCHAR(200) -- Aquí debe llegar mediante llamada POST la URL de la imagen a través de Cloudinar
+    img VARCHAR(200), -- Aquí debe llegar mediante llamada POST la URL de la imagen a través de Cloudinar,
+     FOREIGN KEY (id_country) REFERENCES country (id) ON DELETE CASCADE
+
 );
