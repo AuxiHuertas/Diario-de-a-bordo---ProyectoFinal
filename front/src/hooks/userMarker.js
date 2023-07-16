@@ -27,3 +27,17 @@ export const userMarkerEdit = () => {
   });
   return mutate;
 };
+
+export const userMarkerDelete = () => {
+  const  queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: auth.deleteMarker,
+    onSuccess: (response) => {
+      if (response.success)
+ queryClient.invalidateQueries({ queryKey : ["user"]});
+    },
+  });
+  return mutate;
+};
+

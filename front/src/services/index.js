@@ -1,6 +1,6 @@
 import axios from "axios";
 import { login, signUp,signOut} from "./auth";
-import { editMarker, marker } from "./marker"
+import { editMarker, marker,deleteMarker } from "./marker"
 import { info } from "./user";
 
 
@@ -14,7 +14,8 @@ const auth = {
   signUp: signUp(client),
   signOut: signOut(client),
   marker: marker(client),
-  editMarker: editMarker(client)
+  editMarker: editMarker(client),
+  deleteMarker : deleteMarker(client)
 };
 
 const user = {

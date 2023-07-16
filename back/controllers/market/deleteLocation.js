@@ -4,9 +4,9 @@ const { deleteCountry } = require("../../models/auth");
 
 module.exports = (db) => async (req,res,next) =>  {
 
-   const {id} = req.body
+   const {id} = req.params
    
-   console.log(req.body)
+   console.log(req)
 
    if (!id ) return next (errors[400])
   

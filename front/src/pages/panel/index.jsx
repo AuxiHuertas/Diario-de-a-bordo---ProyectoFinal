@@ -4,7 +4,8 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { FeatureGroup, Circle } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import axios from "axios";
-import { userMarker, userMarkerEdit } from "../../hooks/userMarker";
+import { userMarker, userMarkerDelete, userMarkerEdit } from "../../hooks/userMarker";
+
 
 const Panel = () => {
   const doSignOut = useSignOut();
@@ -12,12 +13,12 @@ const Panel = () => {
   console.log("ESto es doInfoUSeer > ", doInfoUser);
   const position = [51.505, -0.09];
   const doMarkerUser = userMarker();
-  const doEditMarkerUser = userMarkerEdit()
+  const doEditMarkerUser = userMarkerEdit();
+  const doDeleteMarkerUser = userMarkerDelete();
 
   const create = async (e) => {
     const ub = e.layer._latlng;
-    console.log(e);
-    console.log(ub);
+
     const info = await axios.get(
       `http://api.geonames.org/countryCodeJSON?lat=${ub.lat}&lng=${ub.lng}&username=gecak`
     );
@@ -27,7 +28,7 @@ const Panel = () => {
       long: ub.lng,
       name: info.data.countryName,
     });
-    console.log(info);
+
   };
 
   const edited = async (e) => {
@@ -42,10 +43,16 @@ const Panel = () => {
       long: newUb.lng,
       name: infoNewName.data.countryName,
     });
-    console.log("esto es infoNewName",infoNewName)
-    console.log(newUb)
-    console.log("evento edited", e.layers.getLayers());
   };
+
+   const deleteMarker = async (e) => {
+    const idCountryDelete =  e.layers.getLayers()[0].options.id
+    
+    doDeleteMarkerUser({
+      id: idCountryDelete,
+    });
+    console.log(idCountryDelete)
+   }
 
   return (
     <div className="container-fluid">
@@ -78,7 +85,7 @@ const Panel = () => {
                 position="topleft"
                 onEdited={edited}
                 onCreated={create}
-                // onDeleted={this._onDeleted}
+                onDeleted={deleteMarker}
                 draw={{
                   rectangle: false,
                   polygon: false,
