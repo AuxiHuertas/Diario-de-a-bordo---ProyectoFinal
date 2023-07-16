@@ -25,25 +25,31 @@ INSERT INTO country (
     )
 `;
 
-const activity = (id_country, name_activity, date_activity, hour_activity, files) => sql.unsafe `
+const activity = (
+  id_country,
+  name_activity,
+  date_activity,
+  hour_activity,
+  files
+) => sql.unsafe`
 INSERT INTO activities(
     id_country, name_activity, date_activity, hour_activity, files
 ) VALUES (
     ${id_country}, ${name_activity}, ${date_activity}, ${hour_activity},${files}
 )
 
-`
+`;
 
-const pictures = (id_country, img) => sql.unsafe `
+const pictures = (id_country, img) => sql.unsafe`
 INSERT INTO img (
     id_country, img
 ) VALUES (
     ${id_country}, ${img}
 )
 
-`
+`;
 
-const infoUsers = (username) => sql.unsafe `
+const infoUsers = (username) => sql.unsafe`
 SELECT
   country.id AS country_id,
   country.lat_country,
@@ -74,8 +80,31 @@ WHERE
    users.username = ${username}
 GROUP BY
   country.id, country.lat_country, country.lng_country, country.name;
-`
+`;
 
+const deleteLocation = (id) => sql.unsafe`
+DELETE FROM country
+WHERE id=${id}
+`;
+const deleteActivities = (id) => sql.unsafe`
+DELETE FROM activities
+WHERE id_country=${id}
+`;
+const deleteImg = (id) => sql.unsafe`
+DELETE FROM img
+WHERE id_country=${id}
+`;
+
+const updateActivity = (id, name, date, hour, files) => sql.unsafe`
+UPDATE activities
+
+SET name_activity = ${name}, 
+date_activity = ${date}, 
+hour_activity = ${hour}, 
+files = ${files}
+
+WHERE id_country = ${id};
+`;
 
 module.exports = {
   insertUser,
@@ -83,5 +112,9 @@ module.exports = {
   location,
   activity,
   pictures,
-  infoUsers
+  infoUsers,
+  deleteLocation,
+  deleteActivities,
+  deleteImg,
+  updateActivity
 };
