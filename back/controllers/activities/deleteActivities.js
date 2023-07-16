@@ -3,9 +3,9 @@ const { deleteActOnly } = require("../../models/auth");
 
 module.exports = (db) => async (req,res,next) =>  {
 
-   const {id} = req.body
+   const {id} = req.params
    
-   console.log(req.body)
+  
 
    if (!id ) return next (errors[400])
   
