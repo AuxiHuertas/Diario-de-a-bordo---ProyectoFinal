@@ -12,6 +12,7 @@ const Panel = () => {
   console.log("ESto es doInfoUSeer > ", doInfoUser);
   const position = [51.505, -0.09];
   const doMarketUser = userMarket();
+
   const create = async (e) => {
     const ub = e.layer._latlng;
     console.log(e);
@@ -26,6 +27,13 @@ const Panel = () => {
       name: info.data.countryName,
     });
     console.log(info);
+  };
+
+  const edited = async (e) => {
+    const idCountryEdit =  e.layers.getLayers()[0].options.id
+    const newUb = e.layers.getLayers()[0]._latlng;
+    console.log(newUb)
+    console.log("evento edited", e.layers.getLayers());
   };
 
   return (
@@ -57,15 +65,15 @@ const Panel = () => {
             <FeatureGroup>
               <EditControl
                 position="topleft"
-                // onEdited={this._onEditPath}
+                onEdited={edited}
                 onCreated={create}
                 // onDeleted={this._onDeleted}
                 draw={{
                   rectangle: false,
                   polygon: false,
                   circle: false,
-                  polyline: false, 
-                  circlemarker:false,
+                  polyline: false,
+                  circlemarker: false,
                 }}
               />{" "}
               const doMarketUser = userMarket();
@@ -73,6 +81,7 @@ const Panel = () => {
               {doInfoUser.data.response.response.map((infoCountry) => (
                 <Marker
                   position={[infoCountry.lat_country, infoCountry.lng_country]}
+                  id={infoCountry.country_id}
                 >
                   <Popup>
                     A pretty CSS3 popup. <br /> Easily customizable.
