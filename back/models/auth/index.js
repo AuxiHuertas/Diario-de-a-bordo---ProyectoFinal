@@ -9,6 +9,7 @@ const {
   deleteActivities,
   deleteImg,
   updateActivity,
+  updateLocation
 } = require("./queries");
 
 const createNewUser = (db) => async (username, password, email) => {
@@ -198,6 +199,22 @@ const updateActivities = (db) => async (id, name, date, hour, files) => {
   }
 };
 
+const updateMarket = (db) => async (id, ltd, long , name) => {
+    try {
+      await db.query(  updateLocation   (id, ltd, long , name));
+  
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      console.info("> updateActOnly ", error.message);
+      return {
+        ok: false,
+        message: error.message,
+      };
+    }
+  };
+
 module.exports = {
   createNewUser,
   selectByUsername,
@@ -208,5 +225,6 @@ module.exports = {
   deleteCountry,
   deleteImgOnly,
   deleteActOnly,
-  updateActivities
+  updateActivities,
+  updateMarket
 };

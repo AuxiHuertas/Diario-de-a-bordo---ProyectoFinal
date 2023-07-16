@@ -106,6 +106,16 @@ files = ${files}
 WHERE id_country = ${id};
 `;
 
+const updateLocation = (id, ltd, long, name) => sql.unsafe`
+UPDATE country
+
+SET lat_country = ${ltd},
+lng_country = ${long},
+name = ${name}
+
+WHERE id = ${id};
+`;
+
 module.exports = {
   insertUser,
   selectUser,
@@ -116,5 +126,6 @@ module.exports = {
   deleteLocation,
   deleteActivities,
   deleteImg,
-  updateActivity
+  updateActivity,
+  updateLocation
 };
