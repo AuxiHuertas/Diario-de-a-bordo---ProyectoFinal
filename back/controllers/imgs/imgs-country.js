@@ -6,13 +6,14 @@ const { newImg } = require("../../models/auth");
 
 module.exports = (db) => async (req,res,next) =>  {
 
-   const {id_country, img} = req.body
+   const {id_country} = req.body;
+   const {path}= req.file;
    
    console.log(req.body)
 
-   if (!id_country) return next (errors[400])
+   if (!id_country || !path) return next (errors[400])
 
-   const response = await newImg  (await db)(id_country,img);
+   const response = await newImg  (await db)(id_country,path);
 
    console.log(response)
 
