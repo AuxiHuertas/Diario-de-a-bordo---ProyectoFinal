@@ -5,6 +5,8 @@ import { useUser } from "../../hooks/useUser.js";
 import { useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Carousel } from "react-bootstrap";
+import "./style.css"
+
 
 const Login = () => {
   const { register, formState, handleSubmit } = useForm();

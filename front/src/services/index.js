@@ -2,6 +2,7 @@ import axios from "axios";
 import { login, signUp,signOut} from "./auth";
 import { editMarker, marker,deleteMarker } from "./marker"
 import { info } from "./user";
+import { pictures } from "./pictures"
 
 
 const client = axios.create({
@@ -22,4 +23,8 @@ const user = {
   info: info(client),
 };
 
-export { auth, user };
+const img = {
+  picture : pictures(client),
+}
+
+export { auth, user, img };
