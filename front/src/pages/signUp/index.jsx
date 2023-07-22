@@ -1,14 +1,15 @@
 import { useForm } from "react-hook-form";
-import { login } from "../../misc/templates";
+import * as templates from "../../misc/templates.js";
 import { useSignUp } from "../../hooks/useSignUp";
 import { Link } from "wouter";
-import { Carousel } from "react-bootstrap";
+import { Carousel, Form } from "react-bootstrap";
 
 const SignUp = () => {
   const { register, formState, handleSubmit } = useForm();
   const doSigUp = useSignUp();
+  
 
-  const { errors, username, password, email } = login;
+  const { errors, username, password, email } = templates.login;
   return (
     <div className="container-fluid">
       <div className="row">
@@ -47,6 +48,9 @@ const SignUp = () => {
               <p>
                 {formState.errors && errors[formState.errors?.password?.type]}
               </p>
+              <Form.Text muted>
+                Your password must have a minimum of 4 characters.
+                </Form.Text>
               <div class=" d-grid gap-2 col-6 mx-auto">
               <input lassName="btn btn-success" type="submit" />
               </div>
