@@ -93,7 +93,7 @@ const Panel = () => {
                 </Accordion.Item>
               </Accordion>
             ))}
-            <button type="submit" onClick={doSignOut}>
+            <button type="submit" onClick={doSignOut} className="btn btn-light">
               SignOut
             </button>
             {/* Con la operacion ternaria, controlamos que si tenemos id_country, nos abra el modal para integrar la img */}
