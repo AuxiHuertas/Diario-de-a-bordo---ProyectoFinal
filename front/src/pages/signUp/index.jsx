@@ -52,7 +52,7 @@ const SignUp = () => {
                 Your password must have a minimum of 4 characters.
                 </Form.Text>
               <div class=" d-grid gap-2 col-6 mx-auto">
-              <input lassName="btn btn-success" type="submit" />
+              <input className="btn btn-success" type="submit" />
               </div>
             </form>
             <br></br>
@@ -63,7 +63,7 @@ const SignUp = () => {
             </div>
           </section>
         </div>
-        <div className="col-md-9">
+        <div className="col-md-9 carrDiv">
           <Carousel interval={1000}>
             <Carousel.Item>
               <img
