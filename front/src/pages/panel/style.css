@@ -9,3 +9,25 @@
 .sr-only {
   display: none;
 }
+.image-link {
+  margin-right: 10px; /* Espacio entre las imágenes */
+  display: inline-block; /* Asegura que los elementos <a> se muestren en línea */
+}
+
+.image-link img {
+  max-width: 100%;
+  height: auto;
+}
+
+#root > div > div > div.col-md-8 > div > div.leaflet-control-container > div.leaflet-top.leaflet-left > div.leaflet-draw.leaflet-control > div:nth-child(2) > ul > li > a[title="Clear all layers"] {
+  display: none;
+}
+
+
+
+
+
+
+
+
+

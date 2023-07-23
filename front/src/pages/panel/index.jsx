@@ -13,6 +13,8 @@ import { Accordion, Button, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { userPict } from "../../hooks/useImages";
+import "./style.css"
+import { info } from "../../services/user";
 
 const Panel = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -54,6 +56,7 @@ const Panel = () => {
   };
 
   const deleteMarker = async (e) => {
+    
     const idCountryDelete = e.layers.getLayers()[0].options.id;
 
     doDeleteMarkerUser({
@@ -61,13 +64,15 @@ const Panel = () => {
     });
     console.log(idCountryDelete);
   };
+  const maxImagesToShow = 5; // Establece el número máximo de imágenes a mostrar
+  ;
 
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-md-4 text-center">
           <section>
-            <h1>Home</h1>
+            <h1>Travel Memories</h1>
             {doInfoUser.data.response.response.map((infoCountry) => (
               <Accordion>
                 <Accordion.Item eventKey="0">
@@ -77,22 +82,27 @@ const Panel = () => {
                   <Accordion.Body>
                     {infoCountry.images
                       ? infoCountry.images.map((img) => (
-                          <a href={img} target="blank">
-                            Foto
+                          <a href={img} target="blank" className="image-link image-link" >
+                            <img src={img} style={{height:"70px", width:"70px"}}></img>
                           </a>
+                        
                         ))
                       : null}
-                      <br></br>
+                    <br></br>
+                    <br></br>
                     <Button
                       variant="primary"
                       onClick={() => setIdCountry(infoCountry.country_id)}
                     >
-                      Add images in your trip! 
+                      Add images in your trip!
                     </Button>
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
             ))}
+            <br></br>
+            <br></br>
+
             <button type="submit" onClick={doSignOut} className="btn btn-light">
               SignOut
             </button>
@@ -130,16 +140,19 @@ const Panel = () => {
                   circle: false,
                   polyline: false,
                   circlemarker: false,
+                  
                 }}
+
               />
               {/* <Circle center={[51.51, -0.06]} radius={200} /> */}
               {doInfoUser.data.response.response.map((infoCountry) => (
+                console.log(infoCountry),
                 <Marker
                   position={[infoCountry.lat_country, infoCountry.lng_country]}
                   id={infoCountry.country_id}
                 >
                   <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
+                  {[infoCountry.country_name]}
                   </Popup>
                 </Marker>
               ))}
