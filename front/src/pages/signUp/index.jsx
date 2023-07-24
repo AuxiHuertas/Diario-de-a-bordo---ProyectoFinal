@@ -64,7 +64,7 @@ const SignUp = () => {
           </section>
         </div>
         <div className="col-md-9 carrDiv">
-          <Carousel interval={800} fade="bool">
+          <Carousel interval={2000} fade="bool">
             <Carousel.Item>
               <img
                 className="d-block w-100"
