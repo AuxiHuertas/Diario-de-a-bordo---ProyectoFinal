@@ -9,11 +9,17 @@ import {
   userMarkerDelete,
   userMarkerEdit,
 } from "../../hooks/userMarker";
-import { Accordion, Button, Modal } from "react-bootstrap";
+import {
+  Accordion,
+  Button,
+  Modal,
+  Carousel,
+  CarouselItem,
+} from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { userPict } from "../../hooks/useImages";
-import "./style.css"
+import "./style.css";
 import { info } from "../../services/user";
 
 const Panel = () => {
@@ -33,6 +39,7 @@ const Panel = () => {
     const info = await axios.get(
       `http://api.geonames.org/countryCodeJSON?lat=${ub.lat}&lng=${ub.lng}&username=gecak`
     );
+    
     doMarkerUser({
       id_user: doInfoUser.data.id,
       ltd: ub.lat,
@@ -56,7 +63,6 @@ const Panel = () => {
   };
 
   const deleteMarker = async (e) => {
-    
     const idCountryDelete = e.layers.getLayers()[0].options.id;
 
     doDeleteMarkerUser({
@@ -65,14 +71,13 @@ const Panel = () => {
     console.log(idCountryDelete);
   };
   const maxImagesToShow = 5; // Establece el número máximo de imágenes a mostrar
-  ;
-
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-4 text-center">
           <section>
             <h1>Travel Memories</h1>
+            {/* Dentro de esta funcion está el acordeon que contiene el carrusel de img, y el botón que abre el modal para añadir img    */}
             {doInfoUser.data.response.response.map((infoCountry) => (
               <Accordion>
                 <Accordion.Item eventKey="0">
@@ -80,16 +85,28 @@ const Panel = () => {
                     <p>{infoCountry.country_name}</p>
                   </Accordion.Header>
                   <Accordion.Body>
-                    {infoCountry.images
-                      ? infoCountry.images.map((img) => (
-                          <a href={img} target="blank" className="image-link image-link" >
-                            <img src={img} style={{height:"70px", width:"70px"}}></img>
-                          </a>
-                        
-                        ))
-                      : null}
+                    {infoCountry.images ? (
+                      <Carousel data-bs-theme="dark">
+                        {infoCountry.images.map((img, index) => (
+                          <CarouselItem key={index}>
+                            <a
+                              href={img}
+                              target="blank"
+                              className="image-link image-link"
+                            >
+                              <img
+                                src={img}
+                                alt={`Image ${index}`}
+                                style={{ height: "200px", width: "200px" }}
+                              ></img>
+                            </a>
+                          </CarouselItem>
+                        ))}
+                      </Carousel>
+                    ) : null}
                     <br></br>
                     <br></br>
+
                     <Button
                       variant="primary"
                       onClick={() => setIdCountry(infoCountry.country_id)}
@@ -106,7 +123,8 @@ const Panel = () => {
             <button type="submit" onClick={doSignOut} className="btn btn-light">
               SignOut
             </button>
-            {/* Con la operacion ternaria, controlamos que si tenemos id_country, nos abra el modal para integrar la img */}
+            
+            {/*Modal de REactBoostrap, con la operacion ternaria, controlamos que si tenemos id_country, nos abra el modal para integrar la img */}
             {id_country ? (
               <MyVerticallyCenteredModal
                 show={id_country !== null}
@@ -118,6 +136,7 @@ const Panel = () => {
         </div>
 
         <div className="col-md-8">
+          {/* contenedor de mapa leafletDraw */}
           <MapContainer
             center={position}
             zoom={2.6}
@@ -128,6 +147,7 @@ const Panel = () => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+            {/* Opciones de la libreria leafletDraw */}
             <FeatureGroup>
               <EditControl
                 position="topleft"
@@ -140,22 +160,25 @@ const Panel = () => {
                   circle: false,
                   polyline: false,
                   circlemarker: false,
-                  
                 }}
-
               />
-              {/* <Circle center={[51.51, -0.06]} radius={200} /> */}
-              {doInfoUser.data.response.response.map((infoCountry) => (
-                console.log(infoCountry),
-                <Marker
-                  position={[infoCountry.lat_country, infoCountry.lng_country]}
-                  id={infoCountry.country_id}
-                >
-                  <Popup>
-                  {[infoCountry.country_name]}
-                  </Popup>
-                </Marker>
-              ))}
+              {/* Marcador ->  El marker de leaflet utiliza la info del user del back que recibo mediante doInfoUser, (es el hook useUSer), y lo muestra  */}
+              {doInfoUser.data.response.response.map(
+                (infoCountry) => (
+                  console.log(infoCountry),
+                  (
+                    <Marker
+                      position={[
+                        infoCountry.lat_country,
+                        infoCountry.lng_country,
+                      ]}
+                      id={infoCountry.country_id}
+                    >
+                      <Popup>{[infoCountry.country_name]}</Popup>
+                    </Marker>
+                  )
+                )
+              )}
             </FeatureGroup>
           </MapContainer>
         </div>
@@ -164,6 +187,7 @@ const Panel = () => {
   );
 };
 
+// Modal de reactBoostrap, dentro del modal está form para envio de img,
 function MyVerticallyCenteredModal(props) {
   const { register, handleSubmit } = useForm();
   const doImg = userPict();
@@ -182,10 +206,10 @@ function MyVerticallyCenteredModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Imagenes</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Photo gallery</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Añade todas las fotos de tu viaje! </h4>
+        <h4>Add all the photos from your trip! </h4>
 
         <form onSubmit={handleSubmit(dataPicture)}>
           <input

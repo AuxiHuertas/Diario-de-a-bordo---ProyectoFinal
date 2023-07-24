@@ -1,19 +1,19 @@
+import { useMutation, useQueryClient } from "react-query";
+import { auth } from "../services";
 
-import {useMutation, useQueryClient} from 'react-query';
-import { auth } from '../services';
 
+export const useLogin = () => {
+  const queryClient = useQueryClient();
 
-export const useLogin  = () => {
-    const queryClient = useQueryClient()
+  const { mutate } = useMutation({
+    mutationFn: auth.login,
+    onSuccess: (response) => {
+      console.info("mutation response", response);
+      if (response.success)
+        queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
+  });
   
-    const { mutate } = useMutation({
-    
-        mutationFn: auth.login,
-        onSuccess: (response) => {
-            console.info("mutation response",response)
-            if (response.success) 
-                queryClient.invalidateQueries({ queryKey : ["user"]});
-        }
-    });
-    return mutate
-  }
+
+  return mutate;
+};

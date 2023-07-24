@@ -1,36 +1,35 @@
 export const login = {
-    email: {
-      props: {
-        id: "email",
-        placeholder: "user@user.com",
-      },
-      validation: {
-        required: true,
-      },
+  email: {
+    props: {
+      id: "email",
+      placeholder: "user@user.com",
     },
-    username: {
-      props: {
-        id: "username",
-        placeholder: "user",
-      },
-      validation: {
-        required: true,
-      },
+    validation: {
+      required: true,
     },
-    password: {
-      props: {
-        id: "password",
-        type: "password",
-        placeholder: "******",
-      },
-      validation: {
-        required: true,
-        minLength: 4,
-      },
+  },
+  username: {
+    props: {
+      id: "username",
+      placeholder: "user",
     },
-    errors: {
-      required: "This field is mandatory",
-      minLength: "4 length at least is required",
+    validation: {
+      required: true,
     },
-  };
-  
+  },
+  password: {
+    props: {
+      id: "password",
+      type: "password",
+      placeholder: "******",
+    },
+    validation: {
+      required: true,
+      minLength: 4,
+    },
+  },
+  errors: {
+    required: "This field is mandatory",
+    minLength: "4 length at least is required",
+  },
+};

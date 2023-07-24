@@ -14,10 +14,13 @@ const Login = () => {
   const { data } = useUser();
 
   console.log("¿esta aqui el id_user? >", data);
+  console.log("estas viendo useForm()", useForm())
 
   useEffect(() => {
     data && setLocation("/");
   }, [data]);
+
+  console.log("estas viendo data y setLocation>", data,setLocation)
 
   const { errors, email, username, password } = templates.login;
 
