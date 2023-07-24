@@ -90,6 +90,12 @@ const Login = () => {
           </div>
           <div className="col-md-9 carrDiv">
             <Carousel interval={800} fade="bool">
+            <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src="https://cdn.pixabay.com/photo/2016/03/17/23/00/europe-1264062_1280.jpg"
+                />
+              </Carousel.Item>
               <Carousel.Item>
                 <img
                   className="d-block w-100"
@@ -106,19 +112,13 @@ const Login = () => {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="https://cdn.pixabay.com/photo/2016/03/17/23/00/europe-1264062_1280.jpg"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src="https://cdn.pixabay.com/photo/2015/01/28/23/10/mosque-615415_1280.jpg"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
                   src="https://cdn.pixabay.com/photo/2016/01/19/15/48/luggage-1149289_640.jpg"
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src="https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727_1280.jpg"
                 />
               </Carousel.Item>
             </Carousel>
